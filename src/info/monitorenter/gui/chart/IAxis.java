@@ -78,7 +78,12 @@ public interface IAxis extends Serializable {
      * title font.
      */
     public static final String PROPERTY_TITLEPAINTER = "IAxis.AxisTitle.PROPERTY_TITLEPAINTER";
-
+    /**
+     * Constant for a <code>{@link java.beans.PropertyChangeEvent}</code> of the
+     * visibility.
+     */
+    public static final String PROPERTY_VISIBLE = "IAxis.AxisTitle.PROPERTY_VISIBLE";
+    
     /** Generated <code>serialVersionUID</code>. */
     private static final long serialVersionUID = -7734801964168791096L;
 
@@ -97,6 +102,8 @@ public interface IAxis extends Serializable {
     /** The painter of this axis title. */
     private IAxisTitlePainter m_titlePainter;
 
+    /** Visible */ 
+    private boolean m_visible = true;
     /**
      * Creates an instance with the given title backed by a
      * <code>{@link AxisTitlePainterDefault}</code>.
@@ -158,6 +165,12 @@ public interface IAxis extends Serializable {
      * <td><code>{@link IAxis.AxisTitle}</code> that changed</td>
      * <td><code>{@link Color}</code>, the old value.</td>
      * <td><code>{@link Color}</code>, the new value.</td>
+     * </tr>
+     * <tr>
+     * <td><code>{@link IAxis.AxisTitle#PROPERTY_VISIBLE}</code></td>
+     * <td><code>{@link IAxis.AxisTitle}</code> that changed</td>
+     * <td><code>{@link boolean}</code>, the old value.</td>
+     * <td><code>{@link boolean}</code>, the new value.</td>
      * </tr>
      * </table>
      * <p>
@@ -259,7 +272,13 @@ public interface IAxis extends Serializable {
     public final IAxisTitlePainter getTitlePainter() {
       return this.m_titlePainter;
     }
-
+    /**
+     * Returns the title visibility
+     * @return 
+     */
+    public final boolean isVisible() {
+      return this.m_visible;
+    }
     /**
      * Returns the width of this axis title in px with respect to the current
      * title of the given axis.
@@ -358,7 +377,18 @@ public interface IAxis extends Serializable {
           this.m_titlePainter);
       return old;
     }
-
+    /**
+     * Sets the title visibility.
+     * Allows to keep the title name but hide it in the chart.  
+     * @param visible
+     * @return the old value
+     */
+    public final boolean setVisible(final boolean visible) {
+      boolean old = this.m_visible;
+      this.m_visible = visible;
+      this.m_propertyChangeSupport.firePropertyChange(IAxis.AxisTitle.PROPERTY_VISIBLE, old, this.m_visible);
+      return old;
+    }
   }
 
   /**

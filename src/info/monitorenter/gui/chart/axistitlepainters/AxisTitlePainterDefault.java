@@ -63,7 +63,6 @@ public class AxisTitlePainterDefault implements IAxisTitlePainter {
   public AxisTitlePainterDefault() {
     super();
   }
-
   /**
    * @see info.monitorenter.gui.chart.IAxisTitlePainter#getHeight(info.monitorenter.gui.chart.IAxis,
    *      java.awt.Graphics)
@@ -72,7 +71,7 @@ public class AxisTitlePainterDefault implements IAxisTitlePainter {
     int result = 0;
     IAxis.AxisTitle axisTitle = axis.getAxisTitle();
     String title = axisTitle.getTitle();
-    if (!StringUtil.isEmpty(title)) {
+    if (!StringUtil.isEmpty(title) && axisTitle.isVisible()) {
       Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(title, g2d);
       int dimension = axis.getDimension();
       switch (dimension) {
@@ -104,7 +103,7 @@ public class AxisTitlePainterDefault implements IAxisTitlePainter {
     int result = 0;
     IAxis.AxisTitle axisTitle = axis.getAxisTitle();
     String title = axisTitle.getTitle();
-    if (!StringUtil.isEmpty(title)) {
+    if (!StringUtil.isEmpty(title) && axisTitle.isVisible()) {
       // incorporation of our font if there:
       Font backUpFont = g2d.getFont();
       Font titleFont = axisTitle.getTitleFont();

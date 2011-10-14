@@ -972,6 +972,7 @@ public abstract class AAxis implements IAxis, PropertyChangeListener {
     AAxis.propertyReactors.put(IAxis.AxisTitle.PROPERTY_TITLEFONT, repaintReactor);
     AAxis.propertyReactors.put(IAxis.AxisTitle.PROPERTY_TITLE, repaintReactor);
     AAxis.propertyReactors.put(IAxis.AxisTitle.PROPERTY_TITLEPAINTER, repaintReactor);
+    AAxis.propertyReactors.put(IAxis.AxisTitle.PROPERTY_VISIBLE, repaintReactor);
     AAxis.propertyReactors.put(ITrace2D.PROPERTY_MAX_X, new APropertyChangeReactorSynced() {
 
       /**
@@ -2133,6 +2134,7 @@ public abstract class AAxis implements IAxis, PropertyChangeListener {
     axisTitle.addPropertyChangeListener(AxisTitle.PROPERTY_TITLE, this);
     axisTitle.addPropertyChangeListener(AxisTitle.PROPERTY_TITLEFONT, this);
     axisTitle.addPropertyChangeListener(AxisTitle.PROPERTY_TITLEPAINTER, this);
+    axisTitle.addPropertyChangeListener(AxisTitle.PROPERTY_VISIBLE, this);
   }
 
   /**
@@ -2384,7 +2386,7 @@ public abstract class AAxis implements IAxis, PropertyChangeListener {
     // drawing the title :
     final IAxis.AxisTitle axisTitle = this.getAxisTitle();
     final String title = axisTitle.getTitle();
-    if (!StringUtil.isEmpty(title)) {
+    if (!StringUtil.isEmpty(title) && axisTitle.isVisible()) {
       IAxisTitlePainter titlePainter;
       titlePainter = axisTitle.getTitlePainter();
       titlePainter.paintTitle(this, g2d);
@@ -3021,6 +3023,7 @@ public abstract class AAxis implements IAxis, PropertyChangeListener {
       axisTitle.removePropertyChangeListener(AxisTitle.PROPERTY_TITLE, this);
       axisTitle.removePropertyChangeListener(AxisTitle.PROPERTY_TITLEFONT, this);
       axisTitle.removePropertyChangeListener(AxisTitle.PROPERTY_TITLEPAINTER, this);
+      axisTitle.removePropertyChangeListener(AxisTitle.PROPERTY_VISIBLE, this);
     }
   }
 
