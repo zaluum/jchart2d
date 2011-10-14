@@ -199,7 +199,7 @@ public abstract class ALabelFormatter implements IAxisLabelFormatter {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this.m_axis == null) ? 0 : this.m_axis.hashCode());
+    //result = prime * result + ((this.m_axis == null) ? 0 : this.m_axis.hashCode());
     result = prime * result
         + ((this.m_propertyChangeSupport == null) ? 0 : this.m_propertyChangeSupport.hashCode());
     return result;
