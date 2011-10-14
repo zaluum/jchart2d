@@ -3501,41 +3501,38 @@ public class Chart2D extends JPanel implements PropertyChangeListener, Iterable<
         // 1) x - axes:
         Iterator<IAxis> it = this.m_axesXBottom.iterator();
         IAxis currentAxis;
-        boolean success = true;
+        boolean success = false;
         while (it.hasNext()) {
           currentAxis = it.next();
           success = currentAxis.removeTrace(points);
           if (success) {
             // can only be in one x axis
-            success = false;
             break;
           }
         }
         // was not found in bottom x axes:
-        if (success) {
+        if (!success) {
           it = this.m_axesXTop.iterator();
           while (it.hasNext()) {
             currentAxis = it.next();
             success = currentAxis.removeTrace(points);
             if (success) {
-              success = false;
               break;
             }
           }
         }
         // 2) y - axes:
-        success = true;
+        success = false;
         it = this.m_axesYLeft.iterator();
         while (it.hasNext()) {
           currentAxis = it.next();
           success = currentAxis.removeTrace(points);
           if (success) {
-            success = false;
             break;
           }
         }
         // was not found in left y axes:
-        if (success) {
+        if (!success) {
           it = this.m_axesYRight.iterator();
           while (it.hasNext()) {
             currentAxis = it.next();
